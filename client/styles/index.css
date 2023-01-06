@@ -22,12 +22,13 @@ ul {
 /* шапка */
 
 header {
-    width: calc(100vw - 300px);
+    width: calc(100vw - 300px - 46px - 17px);
     border-bottom: 1px solid #13429E;
     display: flex;
     justify-content: left;
     flex-wrap: wrap;
     padding: 10px 0 10px 46px;
+    background-color: #151821;
 }
 
 header h1 {
@@ -54,15 +55,13 @@ header h2 {
     display: block;
 }
 
-.header-container {
-    width: calc(100% - 300px - 46px);
-    min-width: 235px;
-}
-
 /* интерфейс для фиксации */
 
 .interface {
+    padding: 0;
+    margin: 0;
     height:100vh;
+    max-width: 100vw;
     display: flex;
     position: fixed;
 }
@@ -106,4 +105,179 @@ footer p {
 
 footer{
     margin-top: calc(100vh - 36.5vh - 140px - 2vh);
+}
+
+/* hero */
+
+.hero {
+    padding: 56px 0 0 299px;
+}
+
+.hero img {
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: calc(100vw - 317px);
+}
+
+.hero p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 150%;
+    color: #FFFFFF;
+    margin-top: 49px;
+    margin-right: calc(12vw);
+    margin-left: calc(12vw);
+    margin-bottom: 0;
+}
+
+/* лента */
+
+.media {
+    padding-top: 8.1vh;
+    padding-left: calc(299px + 6.51vw);
+    padding-right: calc(6.51vw);
+    padding-bottom: 0;
+}
+
+/* история */
+
+.history img {
+    width: calc(86.98vw - 299px);
+    position: absolute;
+    z-index: -1;
+}
+
+.history .text {
+    padding: 3.9vh 16vw 5.2vh 2.7vw;
+    color: #FFFFFF;
+}
+
+.history .text h2 {
+    font-size: 24px;
+    margin: 8px 0 0 3vw;
+    padding: 0;
+}
+
+.history .text p {
+    font-size: 20px;
+    margin: 3vh 0 0 0;
+    padding: 0;
+}
+
+.created-list {
+    margin: 2vh 0 0 4vh;
+    padding: 0;
+}
+
+.created-list-element {
+    list-style-type: disc;
+    font-size: 20px;
+    margin: 4vh 0 0 0;
+    padding: 0;
+}
+
+.created-list-element:first-child {
+    margin-top: 0;
+}
+
+/* как происходит работа */
+
+.process {
+    margin: 9.5vh 0 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.process img {
+    display: block;
+    object-fit: cover;
+    width: 23.94vw;
+}
+
+.process .text {
+    color: #FFFFFF;
+    width: 41.13vw;
+    padding: 10vh 0 0 0;
+}
+
+.process .text  h2{
+    margin: 0 0 3vh 3vh;
+    padding: 0;
+    font-size: 24px;
+}
+
+.process .text p{
+    margin: 5vh 0 0 0;
+    padding: 0;
+    font-size: 20px;
+}
+
+.work-aspects-list {
+    margin: 4vh 0 0 0;
+    padding: 0 0 0 2vw;
+}
+
+.work-aspects-list-element {
+    margin: 3vh 0 0 0;
+    padding: 0;
+    font-size: 20px;
+    list-style-type: disc;
+}
+
+/* лево-направленные секции */
+
+.left-section {
+    color: #FFFFFF;
+    margin: 9.5vh 0 0 0;
+}
+
+.left-section h2 {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.left-section p {
+    margin: 5vh 0 0 0;
+    padding: 0;
+    font-size: 20px;
+    line-height: 150%;
+}
+
+.left-section ul {
+    margin: 4vh 0 0 0;
+    padding: 0 0 0 2vw;
+}
+
+.left-section li {
+    margin: 3vh 0 0 0;
+    padding: 0;
+    list-style-type: disc;
+    font-size: 20px;
+}
+
+/* карьерный рост */
+
+.career-growth img{
+    display: block;
+    display: block;
+    object-fit: cover;
+    max-width: 100%;
+    margin: 5vh 0 0 0;
+}
+
+/* источник */
+
+.source {
+    width: 100%;
+    margin: 25vh 0 3.2vh 0;
+}
+
+.source p {
+    color: #1347AD;
+    display: block;
+    text-align: center;
+    z-index: 1000;
 }
