@@ -88,7 +88,7 @@ header h2 {
     margin-top: calc(7.3vh);
 }
 
-.nav-list .nav-list-element:first-child a{
+.nav-list-element .selected-option-nav{
     pointer-events: none;
     cursor: default;
     color: #1347AD;
