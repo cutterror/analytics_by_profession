@@ -119,32 +119,52 @@ footer{
     padding-bottom: 14vh;
 }
 
-/* секции */
-
-.section {
-    display: inline-block;
-    margin: 10vh 5.166vw 0 0;
-    padding: 0;
-}
-
-.section h2 {
-    margin: 0;
-    padding: 0;
-}
-
-.section table {
-    margin: 0;
-    width: 30vw;
+.media h1 {
+    margin: 10vh 0 0 0;
+    font-size: 22px;
     text-align: center;
 }
 
-caption {
-    margin: 0 0 2vw 0;
+/* вакансия */
+
+.vacancy {
+    margin: 15vh 0 0 0;
+    font-size: 20px;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+.vacancy .name {
+    margin: 0 0 0 0;
     font-size: 22px;
 }
 
-.section img {
-    display: block;
-    margin: 4vh 0 0 0;
-    width: 30vw;
+.description {
+    margin: 0.5vh 0 0 0;
+}
+
+.description p {
+    white-space:pre-line;
+}
+
+.skills {
+    text-transform: lowercase;
+}
+
+.skills h2 {
+    display: inline;
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.company, .salary, .city, .date {
+    margin: 3vh 0 0 0;
+}
+
+.date {
+    color: #CAE6FF;
+    font-size: 18px;
 }
