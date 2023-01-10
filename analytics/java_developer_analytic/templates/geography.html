@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Java-программист. География</title>
+    <link rel="stylesheet" href="{% static 'styles/geography.css' %}">
+    <link rel="icon" href="{% static 'images/urfu_icon.png' %}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="menu">
+        <nav>
+            <ul class="nav-list">
+                <li class="nav-list-element">
+                    <a href="http://127.0.0.1:5500/client/">
+                        описание профессии
+                    </a>
+                </li>
+                <li class="nav-list-element">
+                    <a href="http://127.0.0.1:5500/client/demand.html">
+                        востребованность
+                    </a>
+                </li>
+                <li class="nav-list-element">
+                    <a href="http://127.0.0.1:5500/client/geography.html" class="selected-option-nav">
+                        география
+                    </a>
+                </li>
+                <li class="nav-list-element">
+                    <a href="http://127.0.0.1:5500/client/skills.html">
+                        навыки
+                    </a>
+                </li>
+                <li class="nav-list-element">
+                    <a href="http://127.0.0.1:5500/client/latest-vacancies.html">
+                        последние вакансии
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <footer>
+            <p class="name">
+                демина анастасия викторовна
+            </p>
+            <p class="group">
+                ри-210942
+            </p>
+        </footer>
+    </div>
+    <main>
+        <div class="header-container">
+            <header>
+                <h1>
+                    Java - разработчик
+                </h1>
+                <h2>
+                    - &nbsp;&nbsp;&nbsp;География
+                </h2>
+            </header>
+        </div>
+        <div class="media">
+            <div class="city-salary section">
+                <table border="1">
+                    <caption>Уровень зарплат по городам</caption>
+                    <tr>
+                     <th>Город</th>
+                     <th>Средняя зарплата</th>
+                    </tr>
+                    <tr><td>Екатеринбург</td><td>100000</td></tr>
+                    <tr><td>Екатеринбург</td><td>100000</td></tr>
+                    <tr><td>Екатеринбург</td><td>100000</td></tr>
+                    <tr><td>Екатеринбург</td><td>100000</td></tr>
+                   </table>
+                <img src="{% static 'images/graph-example.png' %}">
+            </div>
+            <div class="share-city-vacancies section">
+                <table border="1">
+                    <caption>Доля вакансий по городам</caption>
+                    <tr>
+                     <th>Город</th>
+                     <th>Доля вакансий</th>
+                    </tr>
+                    <tr><td>Екатеринбург</td><td>0.1</td></tr>
+                    <tr><td>Екатеринбург</td><td>0.1</td></tr>
+                    <tr><td>Екатеринбург</td><td>0.1</td></tr>
+                    <tr><td>Екатеринбург</td><td>0.1</td></tr>
+                   </table>
+                <img src="{% static 'images/graph-example.png' %}">
+            </div>
+        </div>
+    </main>
+  </body>
+</html>

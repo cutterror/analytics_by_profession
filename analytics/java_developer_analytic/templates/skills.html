@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Java-программист. Навыки</title>
+    <link rel="stylesheet" href="{% static 'styles/skills.css' %}">
+    <link rel="icon" href="{% static 'images/urfu_icon.png' %}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="menu">
+        <nav>
+            <ul class="nav-list">
+                <li class="nav-list-element">
+                    <a href="http://127.0.0.1:5500/client/">
+                        описание профессии
+                    </a>
+                </li>
+                <li class="nav-list-element">
+                    <a href="http://127.0.0.1:5500/client/demand.html">
+                        востребованность
+                    </a>
+                </li>
+                <li class="nav-list-element">
+                    <a href="http://127.0.0.1:5500/client/geography.html">
+                        география
+                    </a>
+                </li>
+                <li class="nav-list-element">
+                    <a href="http://127.0.0.1:5500/client/skills.html" class="selected-option-nav">
+                        навыки
+                    </a>
+                </li>
+                <li class="nav-list-element">
+                    <a href="http://127.0.0.1:5500/client/latest-vacancies.html">
+                        последние вакансии
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <footer>
+            <p class="name">
+                демина анастасия викторовна
+            </p>
+            <p class="group">
+                ри-210942
+            </p>
+        </footer>
+    </div>
+    <main>
+        <div class="header-container">
+            <header>
+                <h1>
+                    Java - разработчик
+                </h1>
+                <h2>
+                    - &nbsp;&nbsp;&nbsp;Навыки
+                </h2>
+            </header>
+        </div>
+        <div class="media">
+            <h1>
+                ТОП-10 необходимых навыков по годам для Java-программиста.
+            </h1>
+            <div class="section">
+                <table border="1">
+                    <caption>2003</caption>
+                    <tr>
+                     <th>Навык</th>
+                     <th>Сколько раз встречается в вакансиях</th>
+                    </tr>
+                    <tr><td>ООП</td><td>700</td></tr>
+                    <tr><td>Английский > A2</td><td>458</td></tr>
+                    <tr><td>Работа в команде</td><td>345</td></tr>
+                    <tr><td>Английский > B1</td><td>123</td></tr>
+                   </table>
+                <img src="{% static 'images/graph-example.png' %}">
+            </div>
+            <div class="section">
+                <table border="1">
+                    <caption>2004</caption>
+                    <tr>
+                     <th>Навык</th>
+                     <th>Сколько раз встречается в вакансиях</th>
+                    </tr>
+                    <tr><td>ООП</td><td>700</td></tr>
+                    <tr><td>Английский > A2</td><td>458</td></tr>
+                    <tr><td>Работа в команде</td><td>345</td></tr>
+                    <tr><td>Английский > B1</td><td>123</td></tr>
+                   </table>
+                <img src="{% static 'images/graph-example.png' %}">
+            </div>
+            <div class="section">
+                <table border="1">
+                    <caption>2005</caption>
+                    <tr>
+                     <th>Навык</th>
+                     <th>Сколько раз встречается в вакансиях</th>
+                    </tr>
+                    <tr><td>ООП</td><td>700</td></tr>
+                    <tr><td>Английский > A2</td><td>458</td></tr>
+                    <tr><td>Работа в команде</td><td>345</td></tr>
+                    <tr><td>Английский > B1</td><td>123</td></tr>
+                   </table>
+                <img src="{% static 'images/graph-example.png' %}">
+            </div>
+            <div class="section">
+                <table border="1">
+                    <caption>2006</caption>
+                    <tr>
+                     <th>Навык</th>
+                     <th>Сколько раз встречается в вакансиях</th>
+                    </tr>
+                    <tr><td>ООП</td><td>700</td></tr>
+                    <tr><td>Английский > A2</td><td>458</td></tr>
+                    <tr><td>Работа в команде</td><td>345</td></tr>
+                    <tr><td>Английский > B1</td><td>123</td></tr>
+                   </table>
+                <img src="{% static 'images/graph-example.png' %}">
+            </div>
+            <div class="section">
+                <table border="1">
+                    <caption>2007</caption>
+                    <tr>
+                     <th>Навык</th>
+                     <th>Сколько раз встречается в вакансиях</th>
+                    </tr>
+                    <tr><td>ООП</td><td>700</td></tr>
+                    <tr><td>Английский > A2</td><td>458</td></tr>
+                    <tr><td>Работа в команде</td><td>345</td></tr>
+                    <tr><td>Английский > B1</td><td>123</td></tr>
+                   </table>
+                <img src="{% static 'images/graph-example.png' %}">
+            </div>
+        </div>
+    </main>
+  </body>
+</html>

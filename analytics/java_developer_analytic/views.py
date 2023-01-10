@@ -3,20 +3,20 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Главная")
+    return render(request, "index.html")
 
 
 def demand(request):
-    return HttpResponse("Востребованность")
+    return render(request, "demand.html")
 
 
 def geography(request):
-    return HttpResponse("География")
+    return render(request, "geography.html")
 
 
 def skills(request):
-    return HttpResponse("Навыки")
+    return render(request, "skills.html")
 
 
 def latest_vacancies(request):
-    return HttpResponse("Последние вакансии")
+    return render(request, "latest-vacancies.html")

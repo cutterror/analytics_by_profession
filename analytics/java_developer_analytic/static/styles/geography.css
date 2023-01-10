@@ -1,0 +1,150 @@
+body{
+    margin: 0;
+    background-color: #151821;
+    min-height: 550px;
+    font-family: 'Play', sans-serif;
+    color: #FFFFFF;
+}
+
+a{
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+    margin: 65px auto 0 auto;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* шапка */
+
+header {
+    position: fixed;
+    left: 300px;
+    width: calc(100vw - 300px - 46px - 17px);
+    border-bottom: 1px solid #13429E;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    padding: 10px 0 10px 46px;
+    background-color: #151821;
+}
+
+header h1 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 37px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0 22px 0 0;
+    padding: 0;
+    display: block;
+}
+
+header h2 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 28px;
+    text-transform: lowercase;
+    color: #FFFFFF;
+    margin: 3px 0 0 0;
+    padding: 0;
+    display: block;
+}
+
+/* менюшка */
+
+.menu {
+    width: 300px;
+    background: linear-gradient(180deg, #092659 7.6%, #151821 116.35%);
+    min-height:100vh;
+    position: fixed;
+}
+
+.nav-list-element a {
+    color: #CAE6FF;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 0 auto 0 43px;
+}
+
+.nav-list-element a:hover {
+    text-shadow: 0px 4px 12px rgba(202, 229, 255, 0.4);
+}
+
+.nav-list-element a:active {
+    color: #9fb6ca;
+}
+
+.nav-list-element {
+    margin: 0;
+    margin-top: calc(7.3vh);
+}
+
+.nav-list-element .selected-option-nav{
+    pointer-events: none;
+    cursor: default;
+    color: #1347AD;
+}
+
+/* подвал */
+
+footer p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #1347AD;
+    margin-left: 43px;
+}
+
+footer{
+    margin-top: calc(100vh - 36.5vh - 140px - 2vh);
+}
+
+/* лента */
+
+.media {
+    padding-top: 3vh;
+    padding-left: calc(299px + 6.51vw);
+    padding-right: calc(6.51vw);
+    padding-bottom: 14vh;
+}
+
+/* секции */
+
+.section {
+    display: inline-block;
+    margin: 10vh 5.166vw 0 0;
+    padding: 0;
+}
+
+.section h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.section table {
+    margin: 0;
+    width: 30vw;
+    text-align: center;
+}
+
+caption {
+    margin: 0 0 2vw 0;
+    font-size: 22px;
+}
+
+.section img {
+    display: block;
+    margin: 4vh 0 0 0;
+    width: 30vw;
+}
