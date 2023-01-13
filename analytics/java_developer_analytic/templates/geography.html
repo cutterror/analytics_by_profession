@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 {% load static %}
 <html lang="ru">
   <head>
@@ -20,7 +20,7 @@
                     </a>
                 </li>
                 <li class="nav-list-element">
-                    <a href="http://127.0.0.1:5500/client/demand.html">
+                    <a href="http://127.0.0.1:8000/demand">
                         востребованность
                     </a>
                 </li>
@@ -69,12 +69,9 @@
                      <th>Город</th>
                      <th>Средняя зарплата</th>
                     </tr>
-                    <tr><td>Екатеринбург</td><td>100000</td></tr>
-                    <tr><td>Екатеринбург</td><td>100000</td></tr>
-                    <tr><td>Екатеринбург</td><td>100000</td></tr>
-                    <tr><td>Екатеринбург</td><td>100000</td></tr>
+                    <tr><td>Алматы</td><td>36968</td></tr><tr><td>Ростов-на-Дону</td><td>46400</td></tr><tr><td>Воронеж</td><td>46735</td></tr><tr><td>Красноярск</td><td>48048</td></tr><tr><td>Уфа</td><td>49232</td></tr><tr><td>Пермь</td><td>49502</td></tr><tr><td>Краснодар</td><td>53014</td></tr><tr><td>Нижний Новгород</td><td>53138</td></tr><tr><td>Самара</td><td>54699</td></tr><tr><td>Казань</td><td>55723</td></tr>
                    </table>
-                <img src="{% static 'images/graph-example.png' %}">
+                <img src="{% static 'images/city_salary_dynamics.png' %}">
             </div>
             <div class="share-city-vacancies section">
                 <table border="1">
@@ -83,12 +80,9 @@
                      <th>Город</th>
                      <th>Доля вакансий</th>
                     </tr>
-                    <tr><td>Екатеринбург</td><td>0.1</td></tr>
-                    <tr><td>Екатеринбург</td><td>0.1</td></tr>
-                    <tr><td>Екатеринбург</td><td>0.1</td></tr>
-                    <tr><td>Екатеринбург</td><td>0.1</td></tr>
+                    <tr><td>Алматы</td><td>3696800%</td></tr><tr><td>Ростов-на-Дону</td><td>4640000%</td></tr><tr><td>Воронеж</td><td>4673500%</td></tr><tr><td>Красноярск</td><td>4804800%</td></tr><tr><td>Уфа</td><td>4923200%</td></tr><tr><td>Пермь</td><td>4950200%</td></tr><tr><td>Краснодар</td><td>5301400%</td></tr><tr><td>Нижний Новгород</td><td>5313800%</td></tr><tr><td>Самара</td><td>5469900%</td></tr><tr><td>Казань</td><td>5572300%</td></tr>
                    </table>
-                <img src="{% static 'images/graph-example.png' %}">
+                <img src="{% static 'images/city_num_vacancies_dynamics.png' %}">
             </div>
         </div>
     </main>
