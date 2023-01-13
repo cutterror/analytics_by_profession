@@ -1,1 +1,4 @@
 .idea
+analytics_calculation/vacancies_by_year.csv
+analytics_calculation/vacancies_dif_currencies.csv
+analytics_calculation/vacancies_with_skills.csv
