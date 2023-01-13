@@ -11,12 +11,13 @@ def print_statistics_report(vacancy_data: list):
     """
 
     keywords = ['java', 'ява', 'джава']
-    statistic = Statistic(keywords, vacancy_data)
+    unwanted_words = ['фронт', 'front', 'javascript']
+    statistic = Statistic(keywords, unwanted_words, vacancy_data)
     report = Report(statistic)
-    report.generate_image()
+    report.generate_images()
     report.render_html_tables()
 
 
-file_name = 'vacancies_dif_currencies.csv'
+file_name = 'vacancies_with_skills.csv'
 data = DataSet(file_name).data
 print_statistics_report(data)

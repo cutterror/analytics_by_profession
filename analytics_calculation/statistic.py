@@ -39,7 +39,7 @@ class Statistic:
         self.__fulfillment (bool): Была ли посчитана статистика
     """
 
-    def __init__(self, keywords: list, data: list):
+    def __init__(self, keywords: list, unwanted_words: list, data: list):
         """Инициализирует объект Statistic
 
         Args:
@@ -48,6 +48,7 @@ class Statistic:
         """
 
         self.__keywords = keywords
+        self.__unwanted_words = unwanted_words
         self.__vacancies_count = 0
         self.__cities = {}
         self.__years = {}
@@ -58,9 +59,15 @@ class Statistic:
         self.__selected_num_vacancies_dynamics = {}
         self.__city_salary_dynamics = {}
         self.__city_num_vacancies_dynamics = {}
+        self.__top_skills_by_year = {}
 
         self.__fulfillment = False
         self.enter_static_data(data)
+
+    @property
+    @check_statistics_preparedness
+    def top_skills_by_year(self):
+        return self.__top_skills_by_year
 
     @property
     @check_statistics_preparedness
@@ -151,10 +158,15 @@ class Statistic:
         else:
             self.__cities[vacancy.area_name].update(vacancy)
         if vacancy.year not in self.__years.keys():
-            self.__years[vacancy.year] = Year(vacancy, self.__keywords)
+            self.__years[vacancy.year] = Year(vacancy, self.__keywords, self.__unwanted_words)
         else:
             self.__years[vacancy.year].update(vacancy)
         self.__vacancies_count += 1
+
+    def calculate_skill_statistics(self):
+        for year in self.__years.values():
+            sorted_skills = dict(sorted(year.skills.items(), key=lambda x: x[1], reverse=True)[:10])
+            self.__top_skills_by_year[year.name] = sorted_skills
 
     def calculate_statistics(self):
         """Считает статистику, сортирует словари статистики по убыванию"""
@@ -174,4 +186,5 @@ class Statistic:
                                                          key=lambda x: x[1].vacancy_count)[:10])
         self.__city_num_vacancies_dynamics = {key: round(val.vacancy_count / self.__vacancies_count, 4)
                                               for key, val in self.__city_num_vacancies_dynamics.items()}
+        self.calculate_skill_statistics()
         self.__fulfillment = True

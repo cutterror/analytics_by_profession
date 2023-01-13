@@ -15,20 +15,32 @@ class Year:
         self.__selected_vacancy_average_salary (float): Средняя зарплата в году среди вакансий с выбранным названием
     """
 
-    def __init__(self, vacancy: Vacancy, keywords: list):
+    def __init__(self, vacancy: Vacancy, keywords: list, unwanted_words: list):
         """Инициализирует объект Year, вычисляет средние значения оклада
         """
 
+        self.__unwanted_words = unwanted_words
         self.__name = vacancy.year
         self.__vacancy_count = 1
         self.__all_salary = vacancy.average_salary
         self.__average_salary = vacancy.average_salary
         self.__keywords = keywords
+        self.__skills = {}
 
-        is_selected_vacancy = any([True if keyword in vacancy.name else False for keyword in self.__keywords])
+        is_selected_vacancy = any(
+            [True if keyword.lower() in vacancy.name.lower() else False for keyword in self.__keywords]) and not (
+            any([True if unwanted.lower() in vacancy.name.lower() else False for unwanted in self.__unwanted_words]))
         self.__selected_vacancy_count = 1 if is_selected_vacancy else 0
         self.__selected_vacancy_all_salary = vacancy.average_salary if is_selected_vacancy else 0
         self.__selected_vacancy_average_salary = vacancy.average_salary if is_selected_vacancy else 0
+
+        if is_selected_vacancy:
+            for skill in vacancy.skills:
+                self.__skills[skill] = 1
+
+    @property
+    def skills(self):
+        return self.__skills
 
     @property
     def name(self):
@@ -71,9 +83,18 @@ class Year:
             self.__all_salary += vacancy.average_salary
             self.__average_salary = self.__all_salary / self.__vacancy_count
 
-            is_selected_vacancy = any([True if keyword in vacancy.name else False for keyword in self.__keywords])
+            is_selected_vacancy = any(
+                [True if keyword.lower() in vacancy.name.lower() else False for keyword in self.__keywords]) and not (
+                any([True if unwanted.lower() in vacancy.name.lower() else False for unwanted in
+                     self.__unwanted_words]))
             if is_selected_vacancy:
                 self.__selected_vacancy_count += 1
                 self.__selected_vacancy_all_salary += vacancy.average_salary
-                self.__selected_vacancy_average_salary = self.__selected_vacancy_all_salary / self.\
+                self.__selected_vacancy_average_salary = self.__selected_vacancy_all_salary / self. \
                     __selected_vacancy_count
+
+                for skill in vacancy.skills:
+                    if skill in self.__skills.keys():
+                        self.__skills[skill] += 1
+                    else:
+                        self.__skills[skill] = 1

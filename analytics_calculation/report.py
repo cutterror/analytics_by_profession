@@ -43,7 +43,7 @@ class Report:
         self.fig.set_figwidth(self.fig_width)
         plt.rc('axes', titlesize=20)
 
-    def generate_image(self):
+    def generate_images(self):
         """Генерирует png-изображение с граффиками по статистике"""
         os.chdir('../analytics/java_developer_analytic/static/images')
         self.create_one_labels_graph(self.__statistic.salary_dynamics.values(), 'средняя з/п',
@@ -68,6 +68,14 @@ class Report:
                                      self.__statistic.city_num_vacancies_dynamics.keys(),
                                      'Количество вакансий по городам (в порядке убывания)',
                                      'city_num_vacancies_dynamics.png')
+        self.generate_skills_images()
+
+    def generate_skills_images(self):
+        for year in self.__statistic.top_skills_by_year.keys():
+            self.create_one_labels_graph(self.__statistic.top_skills_by_year[year].values(), 'количество упоминаний',
+                                         self.__statistic.top_skills_by_year[year].keys(),
+                                         f'Навыки по количеству упоминаний за {year} год',
+                                         f'{year}.png')
 
     def create_one_labels_graph(self, first_labels, first_labels_name: str, ticks, title: str, file_name: str):
         """Добавляет в изображение граффик с одним набороб столбцов
@@ -105,6 +113,7 @@ class Report:
                                                                        self.__statistic.city_salary_dynamics)
         cities_vacancy_num_statistics_trs = self.create_html_statistics_trs(
             lambda x: str(round(x * 100, 2)) + '%', self.__statistic.city_salary_dynamics)
+        skills_tables = self.create_html_statistics_tables(self.__statistic.top_skills_by_year)
 
         self.paste_in_html('geography.html', 'geography.html', cities_salary_statistics_trs,
                            '!cities_salary_statistics_trs!')
@@ -118,6 +127,8 @@ class Report:
                            '!selected_salary_dynamics!')
         self.paste_in_html('demand.html', 'demand.html', selected_num_vacancies_dynamics,
                            '!selected_num_vacancies_dynamics!')
+        self.paste_in_html('skills.html', 'skills.html', skills_tables,
+                           '!skills_tables!')
 
     def paste_in_html(self, file_name: str, new_file_name: str, string: str, string_name: str):
         file = open(file_name, "r", encoding='utf-8-sig')
@@ -150,3 +161,15 @@ class Report:
             statistic_value = format_function(statistics[element])
             tr_template += f'<tr><td>{element}</td><td>{statistic_value}</td></tr>'
         return tr_template
+
+    def create_html_statistics_tables(self, statistics):
+        table_template = ''
+        for table_element in statistics.keys():
+            table_template += f'<div class="section"><table border="1"><caption>{table_element}</caption><tr><th>Навык' \
+                              f'</th><th>Сколько раз встречается в вакансиях</th></tr>'
+            image_src = "{% static 'images/" + str(table_element) + ".png' %}"
+            for tr_element in statistics[table_element].keys():
+                statistic_value = statistics[table_element][tr_element]
+                table_template += f'<tr><td>{tr_element}</td><td>{statistic_value}</td></tr>'
+            table_template += f"</table><img src=\"{image_src}\"></div>"
+        return table_template

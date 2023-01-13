@@ -20,17 +20,6 @@ class Vacancy:
 
         Attributes:
             row_dict (dict): Словарь, по значениям которого с соответсвующими ключами будет иницализирован Vacancy
-
-        >>> type(Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'})).__name__
-        'Vacancy'
-        >>> Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'}).name
-        'Программист'
-        >>> Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'}).area_name
-        'Екатеринбург'
-        >>> Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'}).year
-        2015
-        >>> Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'}).average_salary
-        48500.0
         """
 
         self.__name = row_dict['name']
@@ -40,6 +29,11 @@ class Vacancy:
         self.__salary_to = float(row_dict['salary_to'])
         self.__salary_curr = row_dict['salary_currency']
         self.__average_salary = (self.__salary_from + self.__salary_to) / 2 * self.currency_to_rub[self.__salary_curr]
+        self.__skills = row_dict['key_skills'].split("\n")
+
+    @property
+    def skills(self):
+        return self.__skills
 
     @property
     def name(self):
