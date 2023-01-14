@@ -190,5 +190,5 @@ class Statistic:
                                                          key=lambda x: x[1].vacancy_count)[:10])
         self.__city_num_vacancies_dynamics = {key: round(val.vacancy_count / self.__vacancies_count, 4)
                                               for key, val in self.__city_num_vacancies_dynamics.items()}
-        # self.calculate_skill_statistics()
+        self.calculate_skill_statistics()
         self.__fulfillment = True
