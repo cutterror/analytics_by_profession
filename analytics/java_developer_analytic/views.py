@@ -32,13 +32,14 @@ def geography(request):
 
 
 def skills(request):
-    skill = Skills.objects.all()
+    set_list = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
     data = {}
-    for i in range(len(skill)):
-        data["year" + str(i)] = skill[i].year
+    for i, year in enumerate(set_list):
+        data["year" + str(i)] = year
+        skill_by_year = Skills.objects.filter(year=year)
         for j in range(10):
-            data["skill" + str(i) + "_" + str(j)] = skill[i].skill
-            data["count" + str(i) + "_" + str(j)] = skill[i].skill_count
+            data["skill" + str(i) + "_" + str(j)] = skill_by_year[j].skill
+            data["count" + str(i) + "_" + str(j)] = skill_by_year[j].skill_count
     return render(request, "skills.html", context=data)
 
 
