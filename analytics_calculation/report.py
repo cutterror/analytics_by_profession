@@ -68,7 +68,7 @@ class Report:
                                      self.__statistic.city_num_vacancies_dynamics.keys(),
                                      'Количество вакансий по городам',
                                      'city_num_vacancies_dynamics.png')
-        self.generate_skills_images()
+        # self.generate_skills_images()
 
     def generate_skills_images(self):
         for year in self.__statistic.top_skills_by_year.keys():
@@ -125,8 +125,8 @@ class Report:
                            '!selected_salary_dynamics!')
         self.paste_in_html('demand.html', 'demand.html', selected_num_vacancies_dynamics,
                            '!selected_num_vacancies_dynamics!')
-        self.paste_in_html('skills.html', 'skills.html', skills_tables,
-                           '!skills_tables!')
+        # self.paste_in_html('skills.html', 'skills.html', skills_tables,
+        #                    '!skills_tables!')
 
     def paste_in_html(self, file_name: str, new_file_name: str, string: str, string_name: str):
         file = open(file_name, "r", encoding='utf-8-sig')

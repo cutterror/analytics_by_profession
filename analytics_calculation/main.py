@@ -18,6 +18,6 @@ def print_statistics_report(vacancy_data: list):
     report.render_html_tables()
 
 
-file_name = 'vacancies_with_skills.csv'
+file_name = 'vacancies_dif_currencies.csv'
 data = DataSet(file_name).data
 print_statistics_report(data)
