@@ -168,3 +168,10 @@ ul, li {
     color: #CAE6FF;
     font-size: 18px;
 }
+
+.vacancies {
+    position: absolute;
+    top: 300px;
+    right: 37%;
+    z-index: 1000;
+}

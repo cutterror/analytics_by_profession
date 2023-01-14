@@ -1,5 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.contrib.sites import requests
+from django.shortcuts import render, HttpResponse
+from django.http import JsonResponse
+import json
 
 
 def index(request):
@@ -20,3 +22,8 @@ def skills(request):
 
 def latest_vacancies(request):
     return render(request, "latest-vacancies.html")
+
+
+# def get_vacancies(request):
+#     if request.method == 'GET':
+#         pass
