@@ -23,5 +23,6 @@ urlpatterns = [
     re_path('^geography', views.geography),
     re_path('^skills', views.skills),
     re_path('^latest_vacancies', views.latest_vacancies),
+    re_path('^description', views.index),
     path('', views.index),
 ]

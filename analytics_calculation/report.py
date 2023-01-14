@@ -62,11 +62,11 @@ class Report:
                                      'selected_num_vacancies_dynamics.png')
         self.create_one_labels_graph(self.__statistic.city_salary_dynamics.values(), 'средняя з/п',
                                      self.__statistic.city_salary_dynamics.keys(),
-                                     'Уровень средних зарплат по городам (в порядке убывания)',
+                                     'Уровень средних зарплат по городам',
                                      'city_salary_dynamics.png')
         self.create_one_labels_graph(self.__statistic.city_num_vacancies_dynamics.values(), 'количество вакансий',
                                      self.__statistic.city_num_vacancies_dynamics.keys(),
-                                     'Количество вакансий по городам (в порядке убывания)',
+                                     'Количество вакансий по городам',
                                      'city_num_vacancies_dynamics.png')
         self.generate_skills_images()
 
@@ -100,9 +100,6 @@ class Report:
 
     def render_html_tables(self):
         os.chdir('../../templates')
-        self.render_html_table('geography.html')
-
-    def render_html_table(self, file_name: str):
         salary_dynamics = self.create_html_statistics_trs(lambda x: x, self.__statistic.salary_dynamics)
         num_vacancies_dynamics = self.create_html_statistics_trs(lambda x: x, self.__statistic.num_vacancies_dynamics)
         selected_salary_dynamics = self.create_html_statistics_trs(lambda x: x,
@@ -112,7 +109,8 @@ class Report:
         cities_salary_statistics_trs = self.create_html_statistics_trs(lambda x: x,
                                                                        self.__statistic.city_salary_dynamics)
         cities_vacancy_num_statistics_trs = self.create_html_statistics_trs(
-            lambda x: str(round(x * 100, 2)) + '%', self.__statistic.city_salary_dynamics)
+            lambda x: str(x) + '%',
+            self.__statistic.city_num_vacancies_dynamics)
         skills_tables = self.create_html_statistics_tables(self.__statistic.top_skills_by_year)
 
         self.paste_in_html('geography.html', 'geography.html', cities_salary_statistics_trs,

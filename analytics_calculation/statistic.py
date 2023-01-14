@@ -135,6 +135,10 @@ class Statistic:
 
         return self.__fulfillment
 
+    @check_statistics_preparedness
+    def get_vacancies_percentage(self, city_name):
+        return self.__city_num_vacancies_dynamics[city_name] // self.__cities[city_name].vacancy_count
+
     def enter_static_data(self, data):
         """Заносит в Statistic все вакансии из списка
 
