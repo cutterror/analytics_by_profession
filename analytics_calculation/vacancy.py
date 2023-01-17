@@ -29,7 +29,7 @@ class Vacancy:
         self.__salary_to = float(row_dict['salary_to'])
         self.__salary_curr = row_dict['salary_currency']
         self.__average_salary = (self.__salary_from + self.__salary_to) / 2 * self.currency_to_rub[self.__salary_curr]
-        self.__skills = row_dict['key_skills'].split("\n")
+        self.__skills = row_dict['key_skills'].split("\n") if 'key_skills' in row_dict.keys() else []
 
     @property
     def skills(self):

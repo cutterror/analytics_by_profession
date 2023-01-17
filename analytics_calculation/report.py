@@ -45,7 +45,7 @@ class Report:
 
     def generate_images(self):
         """Генерирует png-изображение с граффиками по статистике"""
-        os.chdir('../analytics/java_developer_analytic/static/images')
+        self.select_image_directory()
         self.create_one_labels_graph(self.__statistic.salary_dynamics.values(), 'средняя з/п',
                                      self.__statistic.salary_dynamics.keys(), 'Средний уровень зарплат по годам',
                                      'salary_dynamics.png')
@@ -70,17 +70,22 @@ class Report:
                                      'city_num_vacancies_dynamics.png')
 
     def generate_skills_images(self):
-        os.chdir('../analytics/java_developer_analytic/static/images')
+        self.select_image_directory()
         for year in self.__statistic.top_skills_by_year.keys():
             self.create_one_labels_graph(self.__statistic.top_skills_by_year[year].values(), 'количество упоминаний',
                                          self.__statistic.top_skills_by_year[year].keys(),
                                          f'Навыки по количеству упоминаний за {year} год',
                                          f'{year}.png')
 
+    def select_image_directory(self):
+        if os.getcwd()[len(os.getcwd()) - 6:] != 'images':
+            os.chdir('../analytics/java_developer_analytic/static/images')
+
     def create_one_labels_graph(self, first_labels, first_labels_name: str, ticks, title: str, file_name: str):
         """Добавляет в изображение граффик с одним набороб столбцов
         """
 
+        self.reset_chart()
         slots = np.arange(len(ticks))
         width = 0.35
         self.axs.bar(slots, first_labels, width, label=first_labels_name)
@@ -89,7 +94,6 @@ class Report:
         self.axs.yaxis.grid(visible=True, which='major', color='grey', alpha=.25)
         self.axs.legend()
         plt.savefig(file_name, dpi=250)
-        self.reset_chart()
 
     def reset_chart(self):
         """Сбрасывает поле для рисования граффиков, чтобы они не наслаивались
