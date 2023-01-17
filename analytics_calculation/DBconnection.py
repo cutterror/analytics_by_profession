@@ -1,8 +1,6 @@
 import sqlite3
 from sqlite3 import Error
 
-path = r'C:\Users\User\Desktop\program\python\project\analytics\db.sqlite3'
-
 
 def create_connection(path):
     connection = None
@@ -27,7 +25,7 @@ def execute_query(connection, query):
         print(f"The error '{e}' occurred")
 
 
-def insert_into(table_name, column_names, item_list):
+def insert_into(table_name, column_names, item_list, path):
     start = f"""INSERT INTO {table_name} ({', '.join(column_names)}) Values """
     for item in item_list:
         item_str = ', '.join(item)
