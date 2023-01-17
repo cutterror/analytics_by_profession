@@ -169,8 +169,9 @@ class Statistic:
 
     def calculate_skill_statistics(self):
         for year in self.__years.values():
-            sorted_skills = dict(sorted(year.skills.items(), key=lambda x: x[1], reverse=True)[:10])
-            self.__top_skills_by_year[year.name] = sorted_skills
+            if len(year.skills) > 0:
+                sorted_skills = dict(sorted(year.skills.items(), key=lambda x: x[1], reverse=True)[:10])
+                self.__top_skills_by_year[year.name] = sorted_skills
 
     def calculate_statistics(self):
         """Считает статистику, сортирует словари статистики по убыванию"""

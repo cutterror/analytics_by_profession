@@ -4,11 +4,11 @@ import DBconnection
 path = r'C:\Users\User\Desktop\program\python\project\analytics\db.sqlite3'
 
 
-def fill_all_databases(with_skills_statistic, without_skills_statistic):
-    fill_demand_database(without_skills_statistic)
-    fill_geography_salary_database(without_skills_statistic)
-    fill_geography_percent_database(without_skills_statistic)
-    fill_skill_database(with_skills_statistic)
+def fill_all_databases(statistic):
+    fill_demand_database(statistic)
+    fill_geography_salary_database(statistic)
+    fill_geography_percent_database(statistic)
+    fill_skill_database(statistic)
 
 
 def fill_demand_database(statistic):

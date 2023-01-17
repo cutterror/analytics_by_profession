@@ -47,8 +47,13 @@ class Report:
         self.fig.set_figwidth(self.fig_width)
         plt.rc('axes', titlesize=20)
 
-    def generate_images(self):
-        """Генерирует png-изображение с граффиками по статистике зарплат, количеству вакансий"""
+    def generate_all_images(self):
+        self.generate_demand_images()
+        self.generate_geography_images()
+        self.generate_skills_images()
+
+    def generate_demand_images(self):
+        """Генерирует png-изображение с граффиками со статистикой зарплат и количества вакансий по годам"""
         select_directory('../analytics/java_developer_analytic/static/images', 'images')
         self.create_one_labels_graph(self.__statistic.salary_dynamics.values(), 'средняя з/п',
                                      self.__statistic.salary_dynamics.keys(), 'Средний уровень зарплат по годам',
@@ -64,6 +69,11 @@ class Report:
                                      self.__statistic.num_vacancies_dynamics.keys(),
                                      'Количество вакансий - \"' + ', '.join(self.__statistic.keywords) + '\" по годам',
                                      'selected_num_vacancies_dynamics.png')
+        select_directory('../../../../analytics_calculation', 'analytics_calculation')
+
+    def generate_geography_images(self):
+        """Генерирует png-изображение с граффиками со статистикой по городам"""
+        select_directory('../analytics/java_developer_analytic/static/images', 'images')
         self.create_one_labels_graph(self.__statistic.city_salary_dynamics.values(), 'средняя з/п',
                                      self.__statistic.city_salary_dynamics.keys(),
                                      'Уровень средних зарплат по городам',
@@ -78,6 +88,8 @@ class Report:
         """Генерирует png-изображение с граффиками по статистике требуемых навыков за определенный год"""
         select_directory('../analytics/java_developer_analytic/static/images', 'images')
         for year in self.__statistic.top_skills_by_year.keys():
+            if len(self.__statistic.top_skills_by_year) < 1:
+                continue
             self.create_one_labels_graph(self.__statistic.top_skills_by_year[year].values(), 'количество упоминаний',
                                          self.__statistic.top_skills_by_year[year].keys(),
                                          f'Навыки по количеству упоминаний за {year} год',
@@ -107,6 +119,11 @@ class Report:
         self.fig.set_figheight(self.fig_height)
         self.fig.set_figwidth(self.fig_width)
         plt.rc('axes', titlesize=20)
+
+    def prepare_all_tables(self):
+        self.prepare_demand_tables()
+        self.prepare_geography_tables()
+        self.prepare_skills_tables()
 
     def prepare_demand_tables(self):
         select_directory('../analytics/java_developer_analytic/templates', 'templates')
@@ -150,6 +167,8 @@ class Report:
         select_directory('../analytics/java_developer_analytic/templates', 'templates')
         skill_tables = ''
         for i, year in enumerate(self.__statistic.top_skills_by_year.keys()):
+            if len(self.__statistic.top_skills_by_year[year]) < 1:
+                continue
             skill_tables += create_html_tables(
                 len(self.__statistic.city_salary_dynamics.keys()), ['skill' + str(i) + '_', 'count' + str(i) + '_'],
                 '{{ year' + str(i) + ' }}', ['Навык', 'Сколько раз встречается в вакансиях'], str(year))
