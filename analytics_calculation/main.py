@@ -19,8 +19,12 @@ def calculate_statistics(without_skills_file_name: str, with_skills_file_name: s
     with_skills_report = Report(with_skills_statistic)
     without_skills_report = Report(without_skills_statistic)
 
-    without_skills_report.generate_images()
-    with_skills_report.generate_skills_images()
+    # without_skills_report.generate_images()
+    # with_skills_report.generate_skills_images()
+
+    # without_skills_report.prepare_demand_tables()
+    # without_skills_report.prepare_geography_tables()
+    with_skills_report.prepare_skills_tables()
 
     # report.generate_images()
     # report.render_html_tables()

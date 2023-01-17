@@ -3,8 +3,12 @@ from openpyxl.styles import Border, Side, Font
 from statistic import Statistic
 import matplotlib.pyplot as plt
 import numpy as np
-from string import Template
 import os
+
+
+def select_directory(patch: str, directory_name: str):
+    if os.getcwd()[len(os.getcwd()) - len(directory_name):] != directory_name:
+        os.chdir(patch)
 
 
 class Report:
@@ -44,8 +48,8 @@ class Report:
         plt.rc('axes', titlesize=20)
 
     def generate_images(self):
-        """Генерирует png-изображение с граффиками по статистике"""
-        self.select_image_directory()
+        """Генерирует png-изображение с граффиками по статистике зарплат, количеству вакансий"""
+        select_directory('../analytics/java_developer_analytic/static/images', 'images')
         self.create_one_labels_graph(self.__statistic.salary_dynamics.values(), 'средняя з/п',
                                      self.__statistic.salary_dynamics.keys(), 'Средний уровень зарплат по годам',
                                      'salary_dynamics.png')
@@ -68,18 +72,17 @@ class Report:
                                      self.__statistic.city_num_vacancies_dynamics.keys(),
                                      'Количество вакансий по городам',
                                      'city_num_vacancies_dynamics.png')
+        select_directory('../../../../analytics_calculation', 'analytics_calculation')
 
     def generate_skills_images(self):
-        self.select_image_directory()
+        """Генерирует png-изображение с граффиками по статистике требуемых навыков за определенный год"""
+        select_directory('../analytics/java_developer_analytic/static/images', 'images')
         for year in self.__statistic.top_skills_by_year.keys():
             self.create_one_labels_graph(self.__statistic.top_skills_by_year[year].values(), 'количество упоминаний',
                                          self.__statistic.top_skills_by_year[year].keys(),
                                          f'Навыки по количеству упоминаний за {year} год',
                                          f'{year}.png')
-
-    def select_image_directory(self):
-        if os.getcwd()[len(os.getcwd()) - 6:] != 'images':
-            os.chdir('../analytics/java_developer_analytic/static/images')
+        select_directory('../../../../analytics_calculation', 'analytics_calculation')
 
     def create_one_labels_graph(self, first_labels, first_labels_name: str, ticks, title: str, file_name: str):
         """Добавляет в изображение граффик с одним набороб столбцов
@@ -105,76 +108,74 @@ class Report:
         self.fig.set_figwidth(self.fig_width)
         plt.rc('axes', titlesize=20)
 
-    def render_html_tables(self):
-        os.chdir('../../templates')
-        salary_dynamics = self.create_html_statistics_trs(lambda x: x, self.__statistic.salary_dynamics)
-        num_vacancies_dynamics = self.create_html_statistics_trs(lambda x: x, self.__statistic.num_vacancies_dynamics)
-        selected_salary_dynamics = self.create_html_statistics_trs(lambda x: x,
-                                                                   self.__statistic.selected_salary_dynamics)
-        selected_num_vacancies_dynamics = self.create_html_statistics_trs(lambda x: x,
-                                                                          self.__statistic.selected_num_vacancies_dynamics)
-        cities_salary_statistics_trs = self.create_html_statistics_trs(lambda x: x,
-                                                                       self.__statistic.city_salary_dynamics)
-        cities_vacancy_num_statistics_trs = self.create_html_statistics_trs(
-            lambda x: str(x) + '%',
-            self.__statistic.city_num_vacancies_dynamics)
-        skills_tables = self.create_html_statistics_tables(self.__statistic.top_skills_by_year)
+    def prepare_demand_tables(self):
+        select_directory('../analytics/java_developer_analytic/templates', 'templates')
+        salary_dynamics = create_html_tables(
+            len(self.__statistic.salary_dynamics.keys()), ['year', 'salary'], 'Динамика уровня зарплат по годам',
+            ['Год', 'Средняя зарплата'], 'salary_dynamics')
+        paste_in_html('demand.html', 'demand.html', salary_dynamics, '<!--salary-dynamics_table-->')
+        num_vacancies_dynamics = create_html_tables(
+            len(self.__statistic.num_vacancies_dynamics.keys()), ['year', 'num'],
+            'Динамика количества вакансий по годам', ['Год', 'Количество вакансий'], 'num_vacancies_dynamics')
+        paste_in_html('demand.html', 'demand.html', num_vacancies_dynamics, '<!--num_vacancies_dynamics_table-->')
+        selected_salary_dynamics = create_html_tables(
+            len(self.__statistic.selected_salary_dynamics.keys()), ['year', 'salary_sel'],
+            'Динамика уровня зарплат по годам для Java-программиста', ['Год', 'Средняя зарплата - Java-программист'],
+            'selected_salary_dynamics')
+        paste_in_html('demand.html', 'demand.html', selected_salary_dynamics,
+                           '<!--selected_salary_dynamics_table-->')
+        selected_num_vacancies_dynamics = create_html_tables(
+            len(self.__statistic.selected_num_vacancies_dynamics.keys()), ['year', 'num_sel'],
+            'Динамика количества вакансий по годам для Java-программиста',
+            ['Год', 'Количество вакансий - Java-программист'], 'selected_num_vacancies_dynamics')
+        paste_in_html('demand.html', 'demand.html', selected_num_vacancies_dynamics,
+                           '<!--selected_num_vacancies_dynamics_table-->')
+        select_directory('../../../analytics_calculation', 'analytics_calculation')
 
-        self.paste_in_html('geography.html', 'geography.html', cities_salary_statistics_trs,
-                           '!cities_salary_statistics_trs!')
-        self.paste_in_html('geography.html', 'geography.html', cities_vacancy_num_statistics_trs,
-                           '!cities_vacancy_num_statistics_trs!')
-        self.paste_in_html('demand.html', 'demand.html', salary_dynamics,
-                           '!salary_dynamics!')
-        self.paste_in_html('demand.html', 'demand.html', num_vacancies_dynamics,
-                           '!num_vacancies_dynamics!')
-        self.paste_in_html('demand.html', 'demand.html', selected_salary_dynamics,
-                           '!selected_salary_dynamics!')
-        self.paste_in_html('demand.html', 'demand.html', selected_num_vacancies_dynamics,
-                           '!selected_num_vacancies_dynamics!')
-        # self.paste_in_html('skills.html', 'skills.html', skills_tables,
-        #                    '!skills_tables!')
+    def prepare_geography_tables(self):
+        select_directory('../analytics/java_developer_analytic/templates', 'templates')
+        cities_salary = create_html_tables(
+            len(self.__statistic.city_salary_dynamics.keys()), ['city', 'salary'],
+            'Уровень зарплат по городам - топ 10, начиная с конца',
+            ['Город', 'Средняя зарплата'], 'city_salary_dynamics')
+        paste_in_html('geography.html', 'geography.html', cities_salary, '<!--cities_salary_table-->')
+        cities_vacancy_num = create_html_tables(
+            len(self.__statistic.city_num_vacancies_dynamics.keys()), ['city_per', 'percent'],
+            'Доля вакансий по городам - топ 10, начиная с конца',
+            ['Город', 'Доля вакансий'], 'city_num_vacancies_dynamics')
+        paste_in_html('geography.html', 'geography.html', cities_vacancy_num, '<!--cities_vacancy_num_table-->')
+        select_directory('../../../analytics_calculation', 'analytics_calculation')
 
-    def paste_in_html(self, file_name: str, new_file_name: str, string: str, string_name: str):
-        file = open(file_name, "r", encoding='utf-8-sig')
-        html = file.read()
-        file.close()
-        new_html = html.replace(string_name, string)
-        new_file = open(new_file_name, "w+", encoding='utf-8-sig')
-        new_file.write(new_html)
-        new_file.close()
+    def prepare_skills_tables(self):
+        select_directory('../analytics/java_developer_analytic/templates', 'templates')
+        skill_tables = ''
+        for i, year in enumerate(self.__statistic.top_skills_by_year.keys()):
+            skill_tables += create_html_tables(
+                len(self.__statistic.city_salary_dynamics.keys()), ['skill' + str(i) + '_', 'count' + str(i) + '_'],
+                '{{ year' + str(i) + ' }}', ['Навык', 'Сколько раз встречается в вакансиях'], str(year))
+        paste_in_html('skills.html', 'skills.html', skill_tables, '<!--skill_tables-->')
+        select_directory('../../../analytics_calculation', 'analytics_calculation')
 
-    def create_html_years_statistics_trs(self):
-        """Заполняет таблицу в pdf файле статистистикой по годам"""
 
-        tr_template = ''
-        for year in self.__statistic.years:
-            average_salary = self.__statistic.salary_dynamics[year]
-            selected_average_salary = self.__statistic.selected_salary_dynamics[year]
-            vacancies_number = self.__statistic.num_vacancies_dynamics[year]
-            selected_vacancies_number = self.__statistic.selected_num_vacancies_dynamics[year]
-            tr_template += f'<tr><td class="year">{year}</td><td>{average_salary}</td><td>{selected_average_salary}' + \
-                           f'</td><td>{vacancies_number}</td><td>{selected_vacancies_number}</td></tr>'
-        return tr_template
+def paste_in_html(file_name: str, new_file_name: str, string: str, string_name: str):
+    file = open(file_name, "r", encoding='utf-8-sig')
+    html = file.read()
+    file.close()
+    new_html = html.replace(string_name, string)
+    new_file = open(new_file_name, "w+", encoding='utf-8-sig')
+    new_file.write(new_html)
+    new_file.close()
 
-    def create_html_statistics_trs(self, format_function, statistics):
-        """Заполняет таблицу в pdf файле статистистикой по городам, применяя форматирование данных
-        """
 
-        tr_template = ''
-        for element in statistics.keys():
-            statistic_value = format_function(statistics[element])
-            tr_template += f'<tr><td>{element}</td><td>{statistic_value}</td></tr>'
-        return tr_template
-
-    def create_html_statistics_tables(self, statistics):
-        table_template = ''
-        for table_element in statistics.keys():
-            table_template += f'<div class="section"><table border="1"><caption>{table_element}</caption><tr><th>Навык' \
-                              f'</th><th>Сколько раз встречается в вакансиях</th></tr>'
-            image_src = "{% static 'images/" + str(table_element) + ".png' %}"
-            for tr_element in statistics[table_element].keys():
-                statistic_value = statistics[table_element][tr_element]
-                table_template += f'<tr><td>{tr_element}</td><td>{statistic_value}</td></tr>'
-            table_template += f"</table><img src=\"{image_src}\"></div>"
-        return table_template
+def create_html_tables(length: int, inserts: list, table_name: str, column_names: list, img_name: str):
+    table_template = f'<div class="section"><table border="1"><caption>{table_name}</caption><tr>'
+    for column_name in column_names:
+        table_template += f'<th>{column_name}</th>'
+    table_template += '</tr>'
+    for i in range(length):
+        table_template += '<tr>'
+        for insert in inserts:
+            table_template += '<td>{{ ' + insert + str(i) + ' }}</td>'
+        table_template += '</tr>'
+    table_template += '''</table><img src="{% static 'images/''' + img_name + '''.png' %}"></div>'''
+    return table_template
