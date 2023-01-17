@@ -4,6 +4,13 @@ import DBconnection
 path = r'C:\Users\User\Desktop\program\python\project\analytics\db.sqlite3'
 
 
+def fill_all_databases(with_skills_statistic, without_skills_statistic):
+    fill_demand_database(without_skills_statistic)
+    fill_geography_salary_database(without_skills_statistic)
+    fill_geography_percent_database(without_skills_statistic)
+    fill_skill_database(with_skills_statistic)
+
+
 def fill_demand_database(statistic):
     fill_db_with_lists(statistic, 'java_developer_analytic_demand',
                        ['year', 'average_salary', 'vacancy_num', 'selected_average_salary', 'selected_vacancy_num'],

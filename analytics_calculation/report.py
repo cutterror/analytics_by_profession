@@ -68,9 +68,9 @@ class Report:
                                      self.__statistic.city_num_vacancies_dynamics.keys(),
                                      'Количество вакансий по городам',
                                      'city_num_vacancies_dynamics.png')
-        # self.generate_skills_images()
 
     def generate_skills_images(self):
+        os.chdir('../analytics/java_developer_analytic/static/images')
         for year in self.__statistic.top_skills_by_year.keys():
             self.create_one_labels_graph(self.__statistic.top_skills_by_year[year].values(), 'количество упоминаний',
                                          self.__statistic.top_skills_by_year[year].keys(),
@@ -92,6 +92,9 @@ class Report:
         self.reset_chart()
 
     def reset_chart(self):
+        """Сбрасывает поле для рисования граффиков, чтобы они не наслаивались
+        """
+
         self.fig.clf()
         self.fig, self.axs = plt.subplots()
         self.fig.set_figheight(self.fig_height)
