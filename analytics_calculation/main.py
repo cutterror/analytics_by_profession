@@ -1,23 +1,24 @@
 from dataset import DataSet
 from report import Report
 from statistic import Statistic
+import DBfilling
 
 
-def print_statistics_report(vacancy_data: list):
-    """Считает статистику и генерирует файлы с ней
-
-    Args:
-        vacancy_data (list): Список словарей с вакансиями для статистики
+def calculate_statistics(file_name: str, keywords: list,
+                         unwanted_words: list):
+    """Считает статистику и производит необходимые манипуляции с ней: заполняет базу данных, генерирует графики
+    и html-таблицы с полями для вставки из базы данных
     """
 
-    keywords = ['java', 'ява', 'джава']
-    unwanted_words = ['фронт', 'front', 'javascript']
-    statistic = Statistic(keywords, unwanted_words, vacancy_data)
+    data = DataSet(file_name).data
+    statistic = Statistic(keywords, unwanted_words, data)
+    statistic.calculate_statistics()
+
+    # DBfilling.fill_all_databases(statistic)
+
     report = Report(statistic)
-    report.generate_images()
-    report.render_html_tables()
+    report.generate_all_images()
+    report.prepare_all_tables()
 
 
-file_name = 'vacancies_dif_currencies.csv'
-data = DataSet(file_name).data
-print_statistics_report(data)
+calculate_statistics('vacancies_with_skills.csv', ['java', 'ява', 'джава'], ['фронт', 'front', 'javascript'])

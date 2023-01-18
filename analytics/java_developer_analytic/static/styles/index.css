@@ -290,3 +290,7 @@ footer{
 .source a:active {
     color: #0c2861;
 }
+
+.html, body, .media {
+    overflow-x: hidden;
+}

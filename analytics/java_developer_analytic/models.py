@@ -12,13 +12,20 @@ class Demand(models.Model):
         verbose_name = 'востребованность'
 
 
-class Geography(models.Model):
+class GeographyPercent(models.Model):
     city = models.CharField(max_length=100)
-    average_salary = models.IntegerField()
     percent_vacancy_num = models.IntegerField()
 
     class Meta:
-        verbose_name = 'география'
+        verbose_name = 'география-количество-вакансий'
+
+
+class GeographySalary(models.Model):
+    city = models.CharField(max_length=100)
+    average_salary = models.IntegerField()
+
+    class Meta:
+        verbose_name = 'география-зарплаты'
 
 
 class Skills(models.Model):

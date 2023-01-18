@@ -25,5 +25,6 @@ urlpatterns = [
     re_path('^latest_vacancies', views.latest_vacancies),
     re_path('^description', views.index),
     path(r'admin/', admin.site.urls),
+    # path(r'get_vacancies', views.get_vacancies, name='get_vacancies'),
     path('', views.index),
 ]

@@ -34,9 +34,9 @@ class Year:
         self.__selected_vacancy_all_salary = vacancy.average_salary if is_selected_vacancy else 0
         self.__selected_vacancy_average_salary = vacancy.average_salary if is_selected_vacancy else 0
 
-        # if is_selected_vacancy:
-        #     for skill in vacancy.skills:
-        #         self.__skills[skill] = 1
+        if is_selected_vacancy:
+            for skill in vacancy.skills:
+                self.__skills[skill] = 1
 
     @property
     def skills(self):
@@ -93,8 +93,8 @@ class Year:
                 self.__selected_vacancy_average_salary = self.__selected_vacancy_all_salary / self. \
                     __selected_vacancy_count
 
-                # for skill in vacancy.skills:
-                #     if skill in self.__skills.keys():
-                #         self.__skills[skill] += 1
-                #     else:
-                #         self.__skills[skill] = 1
+                for skill in vacancy.skills:
+                    if skill in self.__skills.keys():
+                        self.__skills[skill] += 1
+                    else:
+                        self.__skills[skill] = 1

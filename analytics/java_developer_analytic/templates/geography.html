@@ -62,28 +62,8 @@
             </header>
         </div>
         <div class="media">
-            <div class="city-salary section">
-                <table border="1">
-                    <caption>Уровень зарплат по городам - топ 10, начиная с конца</caption>
-                    <tr>
-                     <th>Город</th>
-                     <th>Средняя зарплата</th>
-                    </tr>
-                    <tr><td>Алматы</td><td>36968</td></tr><tr><td>Ростов-на-Дону</td><td>46400</td></tr><tr><td>Воронеж</td><td>46735</td></tr><tr><td>Красноярск</td><td>48048</td></tr><tr><td>Уфа</td><td>49232</td></tr><tr><td>Пермь</td><td>49502</td></tr><tr><td>Краснодар</td><td>53014</td></tr><tr><td>Нижний Новгород</td><td>53138</td></tr><tr><td>Самара</td><td>54699</td></tr><tr><td>Казань</td><td>55723</td></tr>
-                   </table>
-                <img src="{% static 'images/city_salary_dynamics.png' %}">
-            </div>
-            <div class="share-city-vacancies section">
-                <table border="1">
-                    <caption>Доля вакансий по городам - топ 10, начиная с конца</caption>
-                    <tr>
-                     <th>Город</th>
-                     <th>Доля вакансий</th>
-                    </tr>
-                    <tr><td>Уфа</td><td>0.0102%</td></tr><tr><td>Пермь</td><td>0.0108%</td></tr><tr><td>Красноярск</td><td>0.0109%</td></tr><tr><td>Воронеж</td><td>0.0124%</td></tr><tr><td>Самара</td><td>0.0126%</td></tr><tr><td>Киев</td><td>0.0136%</td></tr><tr><td>Краснодар</td><td>0.0159%</td></tr><tr><td>Екатеринбург</td><td>0.0182%</td></tr><tr><td>Ростов-на-Дону</td><td>0.0182%</td></tr><tr><td>Алматы</td><td>0.019%</td></tr>
-                   </table>
-                <img src="{% static 'images/city_num_vacancies_dynamics.png' %}">
-            </div>
+            <div class="section"><table border="1"><caption>Уровень зарплат по городам - топ 10, начиная с конца</caption><tr><th>Город</th><th>Средняя зарплата</th></tr><tr><td>{{ city0 }}</td><td>{{ salary0 }}</td></tr><tr><td>{{ city1 }}</td><td>{{ salary1 }}</td></tr><tr><td>{{ city2 }}</td><td>{{ salary2 }}</td></tr><tr><td>{{ city3 }}</td><td>{{ salary3 }}</td></tr><tr><td>{{ city4 }}</td><td>{{ salary4 }}</td></tr><tr><td>{{ city5 }}</td><td>{{ salary5 }}</td></tr><tr><td>{{ city6 }}</td><td>{{ salary6 }}</td></tr><tr><td>{{ city7 }}</td><td>{{ salary7 }}</td></tr><tr><td>{{ city8 }}</td><td>{{ salary8 }}</td></tr><tr><td>{{ city9 }}</td><td>{{ salary9 }}</td></tr></table><img src="{% static 'images/city_salary_dynamics.png' %}"></div>
+            <div class="section"><table border="1"><caption>Доля вакансий по городам - топ 10, начиная с конца</caption><tr><th>Город</th><th>Доля вакансий</th></tr><tr><td>{{ city_per0 }}</td><td>{{ percent0 }}</td></tr><tr><td>{{ city_per1 }}</td><td>{{ percent1 }}</td></tr><tr><td>{{ city_per2 }}</td><td>{{ percent2 }}</td></tr><tr><td>{{ city_per3 }}</td><td>{{ percent3 }}</td></tr><tr><td>{{ city_per4 }}</td><td>{{ percent4 }}</td></tr><tr><td>{{ city_per5 }}</td><td>{{ percent5 }}</td></tr><tr><td>{{ city_per6 }}</td><td>{{ percent6 }}</td></tr><tr><td>{{ city_per7 }}</td><td>{{ percent7 }}</td></tr><tr><td>{{ city_per8 }}</td><td>{{ percent8 }}</td></tr><tr><td>{{ city_per9 }}</td><td>{{ percent9 }}</td></tr></table><img src="{% static 'images/city_num_vacancies_dynamics.png' %}"></div>
         </div>
     </main>
   </body>

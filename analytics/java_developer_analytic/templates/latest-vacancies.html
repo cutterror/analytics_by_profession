@@ -66,7 +66,7 @@
                 Последние вакансии, опубликованные в будний день:
             </h1>
             <div class="vacancy">
-                <ul class="vacancy-list">
+                <!-- <ul class="vacancy-list">
                     <li class="vacancy-list-element name">
                         Программист-разработчик Java
                     </li>
@@ -200,8 +200,13 @@
                         5.01.2023
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </main>
+    <div class="vacancies">
+        <script class="hh-script" src="https://api.hh.ru/widgets/vacancies/search?count=6&locale=RU&links_color=1560b2&border_color=1560b2&show_region=true&text=java"></script>
+    </div>
+    <!-- <script class="hh-script" src="https://api.hh.ru/widgets/vacancies/search?count=3&locale=RU&links_color=1560b2&border_color=1560b2"></script> -->
+    <script src="{% static 'scripts/api.js' %}"></script>
   </body>
 </html>
