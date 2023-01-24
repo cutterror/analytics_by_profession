@@ -4,8 +4,7 @@ from statistic import Statistic
 import DBfilling
 
 
-def calculate_statistics(file_name: str, keywords: list,
-                         unwanted_words: list):
+def calculate_statistics(file_name: str, keywords: list, unwanted_words: list):
     """Считает статистику и производит необходимые манипуляции с ней: заполняет базу данных, генерирует графики
     и html-таблицы с полями для вставки из базы данных
     """

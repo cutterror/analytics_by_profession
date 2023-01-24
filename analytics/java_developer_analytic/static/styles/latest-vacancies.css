@@ -113,7 +113,7 @@ footer{
 /* лента */
 
 .media {
-    padding-top: 3vh;
+    padding-top: 15vh;
     padding-left: calc(299px + 6.51vw);
     padding-right: calc(6.51vw);
     padding-bottom: 14vh;
@@ -121,7 +121,7 @@ footer{
 
 .media h1 {
     margin: 10vh 0 0 0;
-    font-size: 22px;
+    font-size: 26px;
     text-align: center;
 }
 
@@ -132,46 +132,50 @@ footer{
     font-size: 20px;
 }
 
+.media .vacancy:first-child {
+    margin-top: 0;
+}
+
 ul, li {
     margin: 0;
     padding: 0;
 }
 
-.vacancy .name {
-    margin: 0 0 0 0;
-    font-size: 22px;
+.vacancy p, .vacancy h2 {
+    display: inline-block;
 }
 
-.description {
-    margin: 0.5vh 0 0 0;
+.vacancy p {
+    margin: 0 0 0 15px;
 }
 
-.description p {
-    white-space:pre-line;
+.vacancy .description h2, .vacancy .description p, 
+.vacancy .skills h2,  .vacancy .skills p{
+    display: block;
 }
 
-.skills {
-    text-transform: lowercase;
+.vacancy .description p, .vacancy .skills p{
+    margin: 25px 0 0 35px;
 }
 
-.skills h2 {
-    display: inline;
-    font-size: 20px;
-    text-transform: capitalize;
+.vacancy .skills h2, .vacancy .company h2 {
+    margin-top: 40px;
 }
 
-.company, .salary, .city, .date {
-    margin: 3vh 0 0 0;
+.vacancy .name p {
+    font-size: 26px;
 }
 
-.date {
-    color: #CAE6FF;
+.vacancy .name h2 {
+    font-size: 26px;
+}
+
+.vacancy h2 {
+    font-size: 24px;
+}
+
+.date h2, .date p{
+    margin-top: 45px;
     font-size: 18px;
-}
-
-.vacancies {
-    position: absolute;
-    top: 300px;
-    right: 37%;
-    z-index: 1000;
+    color: #9fb6ca;
 }

@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponseNotFound
 from .models import *
+from .hhApi.hh_vacancies import HHJavaVacancies
+import re
 
 
 def index(request):
@@ -32,9 +33,9 @@ def geography(request):
 
 
 def skills(request):
-    set_list = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+    years = sorted(list(set([value.year for value in Skills.objects.all()])))
     data = {}
-    for i, year in enumerate(set_list):
+    for i, year in enumerate(years):
         data["year" + str(i)] = year
         skill_by_year = Skills.objects.filter(year=year)
         for j in range(10):
@@ -43,5 +44,32 @@ def skills(request):
     return render(request, "skills.html", context=data)
 
 
+def get_salary_str(vacancy: dict):
+    if vacancy["salary"] is None:
+        return "Не указан"
+    elif vacancy["salary"]["from"] is None and vacancy["salary"]["to"] is not None:
+        return f'до {vacancy["salary"]["to"]}'
+    elif vacancy["salary"]["to"] is None and vacancy["salary"]["from"] is not None:
+        return f'от {vacancy["salary"]["from"]}'
+    return f'{vacancy["salary"]["from"]} - {vacancy["salary"]["to"]}'
+
+
+def clean_string(string: str):
+    result = re.sub(re.compile('<.*?>'), '', string).split("\n")
+    return ", ".join([" ".join(value.strip().split()) for value in result])
+
+
 def latest_vacancies(request):
-    return render(request, "latest-vacancies.html")
+    java_vacancies = HHJavaVacancies().vacancies
+    data = {}
+    for i, vacancy in enumerate(java_vacancies):
+        data["name" + str(i)] = vacancy["name"]
+        data["description" + str(i)] = "Не указано" if vacancy["snippet"]["responsibility"] is None \
+            else clean_string(vacancy["snippet"]["responsibility"])
+        data["skills" + str(i)] = "Не указаны" if vacancy["snippet"]["requirement"] is None \
+            else clean_string(vacancy["snippet"]["requirement"])
+        data["salary" + str(i)] = get_salary_str(vacancy)
+        data["city" + str(i)] = vacancy["area"]["name"]
+        data["company" + str(i)] = vacancy["employer"]["name"]
+        data["date" + str(i)] = vacancy["published_at"][:10]
+    return render(request, "latest-vacancies.html", context=data)
